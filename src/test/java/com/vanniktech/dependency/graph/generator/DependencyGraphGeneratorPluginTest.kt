@@ -138,7 +138,7 @@ class DependencyGraphGeneratorPluginTest {
         }""".trimIndent())
   }
 
-  @Test fun multiProjectIntegrationTest() {
+  @Test @Suppress("Detekt.LongMethod") fun multiProjectIntegrationTest() {
     testProjectDir.newFile("build.gradle").writeText("""
         |plugins {
         |  id "com.vanniktech.dependency.graph.generator"
