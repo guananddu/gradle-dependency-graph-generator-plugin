@@ -150,6 +150,7 @@ class DependencyGraphGeneratorPluginTest {
         |include ":lib1"
         |include ":lib2"
         |include ":app"
+        |include ":empty"
         |""".trimMargin())
 
     val lib = testProjectDir.newFolder("lib").run { parentFile.name + name }
@@ -198,6 +199,8 @@ class DependencyGraphGeneratorPluginTest {
         |}
         |""".trimMargin())
 
+    val empty = testProjectDir.newFolder("empty").run { parentFile.name + name }
+
     val stdErrorWriter = StringWriter()
 
     GradleRunner.create()
@@ -226,9 +229,11 @@ class DependencyGraphGeneratorPluginTest {
         "orgjetbrainskotlinkotlinstdlib" ["shape"="rectangle","label"="kotlin-stdlib"]
         "orgjetbrainsannotations" ["shape"="rectangle","label"="jetbrains-annotations"]
         "$lib2" ["shape"="rectangle","label"="lib2"]
+        "$empty" ["shape"="rectangle","label"="empty"]
         {
         graph ["rank"="same"]
         "$app"
+        "$empty"
         }
         "$app" -> "$lib1"
         "$app" -> "$lib2"
